@@ -1,0 +1,8 @@
+ main is the main file 
+ everthing will be imported header
+  the componnets are divided in 
+  - upper box have 20 % of the container
+  -lower box have 75% 
+    (this is further divided into 2 )
+        -calender 
+        -timer 

@@ -1,0 +1,46 @@
+/* *{
+  align-items: center;
+  justify-content: center;
+} */
+.main {
+  align-content: center;
+  justify-content: center;
+}
+input {
+  width: 45vw;
+  height: 5vh;
+  border-radius: 10px;
+}
+.display {
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+}
+span {
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+.timer {
+  justify-content: center;
+  display: flex;
+  align-content: center;
+  width: 15vw;
+  height: 40vh;
+  margin-top: 6%;
+}
+.list {
+  height: 20vh;
+  overflow-y: scroll;
+  margin-right: 15px;
+}
+.list::-webkit-scrollbar {
+  width: 5px;
+}
+.list::-webkit-scrollbar-track {
+  background-color: white;
+}
+.list::-webkit-scrollbar-thumb {
+  background: rgb(219, 206, 241);
+}
