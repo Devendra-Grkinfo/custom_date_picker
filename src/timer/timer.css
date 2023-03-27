@@ -1,0 +1,28 @@
+.timer {
+    align-items: center;
+    display: flex;
+    width: 15vw;
+    height: 40vh;
+    flex-direction: column;
+    margin-top:5vh;
+  }
+  .list {
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    z-index: 0;
+    height: 25vh;
+  }
+  button{
+    background-color: white;
+    border: none;
+  }
+  
+  /* .list::-webkit-scrollbar {
+    z-index: -1;
+  }
+  .list::-webkit-scrollbar-track {
+    background-color: rgb(219, 209, 209);
+  }
+  .list::-webkit-scrollbar-thumb {
+    background: rgb(195, 193, 193);
+  } */
