@@ -16,7 +16,7 @@ const Main = () => {
       <div>
         <input
           onClick={handleOpen}
-          placeholder="When does the filiming starts ?" value={date.toDateString()}/>
+          placeholder="When does the filiming starts ?" />
       </div>
       {open ? <DisplayArea date={date} setDate={setDate} /> : <></>}
     </div>
@@ -24,3 +24,6 @@ const Main = () => {
 };
 
 export default Main;
+
+
+// value={date.toDateString()}
