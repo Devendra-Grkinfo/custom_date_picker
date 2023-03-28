@@ -21,8 +21,8 @@ const Main = () => {
           placeholder="Enter date and time "
           value={date.toDateString() + " " + time}
           onChange={(e) => setTime(e.target.value)}
-
         />
+
       </div>
       {open ? <DisplayArea date={date} setDate={setDate} time={time} setTime={setTime} /> : null}
     </div>
@@ -30,3 +30,6 @@ const Main = () => {
 };
 
 export default Main;
+
+
+// value={date.toDateString()}
