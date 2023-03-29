@@ -18,8 +18,8 @@
   background-color: #eee;
 }
 .timer .list p.selected {
-  background-color: #10ff44;
-  color: #eee;
+  background-color:  rgb(34, 140, 34);
+  color: #FFFFFF;
   padding: 4px;
 }
 button {
