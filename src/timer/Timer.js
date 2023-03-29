@@ -1,4 +1,4 @@
-import React, { useState  } from "react";
+import React, { useState, useEffect } from "react";
 import './timer.css'
 import { BsChevronUp } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
@@ -6,10 +6,19 @@ import { BsChevronDown } from "react-icons/bs";
 
 const Timer = (props) => {
 
-  const { time, setTime,selectedTime, numIntervals = 4 } = props;
-  const [index, setIndex] = useState(0);
+  const { time, setTime, selectedTime, numIntervals = 5 } = props;
+  const [index, setIndex] = useState(() => {
+    const selectedIndex = time.indexOf(selectedTime);
+    return selectedIndex === -1 ? 0 : selectedIndex;
+  });
 
- 
+  useEffect(() => {
+    const selectedIndex = time.indexOf(selectedTime);
+    if (selectedIndex !== -1) {
+      setIndex(selectedIndex);
+    }
+  }, [selectedTime]);
+
 
   const increaseScroll = () => {
     //setIndex((index + 1) % time.length);
@@ -36,13 +45,18 @@ const Timer = (props) => {
   const isLastTimeValue = time[time.length - 1] === "23:59";
   const circularTime = isLastTimeValue ? ["00:00", ...time, "00:00"] : time;
 
+  if (index + numIntervals > circularTime.length) {
+    const remaining = index + numIntervals - circularTime.length;
+    circularTime.push(...circularTime.slice(0, remaining));
+  }
+
   return (
     <div className="timer">
       <button onClick={increaseScroll}><BsChevronUp /></button>
       <div className="list">
         {circularTime.slice(index, index + numIntervals).map((title) => (
           <p key={title} onClick={() => handleTimeSelection(title)}
-           className={selectedTime === title ? "selected" : ""}
+            className={selectedTime === title ? "selected" : ""}
           >{title}</p>
         ))}
       </div>
