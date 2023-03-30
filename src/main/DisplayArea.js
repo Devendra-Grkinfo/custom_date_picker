@@ -1,10 +1,11 @@
 import React from "react";
 import Calender from "../calender/Calender";
+import { useState } from "react";
 import Timer from "../timer/Timer";
 
 const DisplayArea = (props) => {
 
-  const { date, setDate, time, setTime } = props;
+  const { time, setTime } = props;
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += 1) {
@@ -12,11 +13,13 @@ const DisplayArea = (props) => {
       times.push(time);
     }
   }
+  const [currentDate, setCurrentDate] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
   return (
     <div className="display">
       <span className="display1">
-        <Calender date={date} setDate={setDate} />
+        <Calender currentDate ={currentDate} setCurrentDate ={setCurrentDate} selectedDate ={selectedDate} setSelectedDate = {setSelectedDate} />
         <Timer time={times} selectedTime={time} setTime={setTime} numIntervals={5}  />
 
       </span>

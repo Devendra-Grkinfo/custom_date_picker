@@ -6,8 +6,9 @@ const Cells = (props) => {
  const{currentDate,setCurrentDate,selectedDate,setSelectedDate} = props 
  const onDateClick =(day) => {
     setSelectedDate(day);
+    setCurrentDate(day)
     } 
-
+    console.log(currentDate)
 const monthStart = startOfMonth(currentDate);
 const monthEnd = endOfMonth(monthStart);
 const startDate = startOfWeek(monthStart);
@@ -20,14 +21,14 @@ let formattedDate = "";
 while (day <= endDate) {
    for (let i = 0; i < 7; i++) {
    formattedDate = format(day, dateFormat);
-//    const cloneDay = day;
+    const cloneDay = day;
    days.push(
       <div 
-       className={`column cell ${!isSameMonth(day, monthStart)
+       className={` ${!isSameMonth(day, monthStart)
        ? "disabled" : isSameDay(day, selectedDate) 
        ? "selected" : "" }`} 
        key={day} 
-       onClick={() => onDateClick(day)}
+       onClick={() => onDateClick(cloneDay)}
        > 
        <span className="number">{formattedDate}</span>
        {/* <span className="bg">{formattedDate}</span> */}

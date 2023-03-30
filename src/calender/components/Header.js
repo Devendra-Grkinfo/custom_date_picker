@@ -2,12 +2,14 @@ import React from 'react'
 import {format , addMonths, subMonths } from "date-fns";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
+import '../calender.css'
+import { useState } from "react";
 
 const Header = (props) => {
 
     const{currentDate,setCurrentDate} = props
-
-    const dateFormat = " MMM yyyy"
+    const [monthGrid, setMonthGrid] = useState(true)
+    const [dateFormat,setDateFormat] = useState("MMMM yyyy")
 
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));
@@ -15,24 +17,31 @@ const Header = (props) => {
      const prevMonth = () => {
         setCurrentDate(subMonths(currentDate, 1));
      }  
+     const onClickMonth =()=> {
+         setMonthGrid(!monthGrid)
+         setDateFormat("yyyy")
+     }
 
 
   return (
+   <div className='dateview'>
     <div className="header ">
     <div>
-       <button className="icon" onClick={prevMonth}>
+       <button className="header-icon" onClick={prevMonth}>
           <BsChevronLeft/> 
        </button>
     </div>
     <div>
-       <span>{format(currentDate, dateFormat)}</span>
+       <button className="header-icon" onClick={onClickMonth}>{format(currentDate, dateFormat)}</button>
     </div>
     <div>
-       <button className="icon" onClick={nextMonth}>
+       <button className="header-icon" onClick={nextMonth}>
           <BsChevronRight/>
        </button>
     </div>
- </div>
+    </div>
+
+    </div>
   )
 }
 
