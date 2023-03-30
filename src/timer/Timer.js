@@ -6,7 +6,7 @@ import { BsChevronDown } from "react-icons/bs";
 
 const Timer = (props) => {
 
-  const { time, setTime, selectedTime, numIntervals = 5 } = props;
+  const { time, setTime, selectedTime, numIntervals = 5, color } = props;
   const [index, setIndex] = useState(() => {
     const selectedIndex = time.indexOf(selectedTime);
     return selectedIndex === -1 ? 0 : selectedIndex;
@@ -57,6 +57,7 @@ const Timer = (props) => {
         {circularTime.slice(index, index + numIntervals).map((title) => (
           <p key={title} onClick={() => handleTimeSelection(title)}
             className={selectedTime === title ? "selected" : ""}
+            style={{ backgroundColor: selectedTime === title ? color : "" }}
           >{title}</p>
         ))}
       </div>

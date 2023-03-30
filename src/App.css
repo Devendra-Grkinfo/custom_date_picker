@@ -2,13 +2,14 @@
   align-items: center;
   justify-content: center;
 } */
-.main {
+.main { 
   align-content: center;
   justify-content: center;
 }
 input{
-  width: 45vw;
+  width: 42vw;
   height: 5vh;
+  margin-top: 1em;
   border-radius: 10px;
 }
 .display {
@@ -21,4 +22,5 @@ input{
   flex-direction: row;
   border-radius: 10px;
   border: 2px solid black;
+  width: 42vw;
 }
