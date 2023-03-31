@@ -17,7 +17,7 @@ const Timer = (props) => {
     if (selectedIndex !== -1) {
       setIndex(selectedIndex);
     }
-  }, [selectedTime]);
+  }, [selectedTime, time]);
 
 
   const increaseScroll = () => {
@@ -51,17 +51,25 @@ const Timer = (props) => {
   }
 
   return (
-    <div className="timer">
-      <button onClick={increaseScroll}><BsChevronUp /></button>
-      <div className="list">
-        {circularTime.slice(index, index + numIntervals).map((title) => (
-          <p key={title} onClick={() => handleTimeSelection(title)}
-            className={selectedTime === title ? "selected" : ""}
-            style={{ backgroundColor: selectedTime === title ? color : "" }}
-          >{title}</p>
-        ))}
+    <div className="timer" >
+      <div className="head">
+        <div >
+          <button className="button" onClick={increaseScroll}><BsChevronUp />
+          </button>
+        </div>
+        <div className="list" >
+          {circularTime.slice(index, index + numIntervals).map((time) => (
+            <p key={time} onClick={() => handleTimeSelection(time)}
+              className={selectedTime === time ? "selected" : ""}
+              style={{ backgroundColor: selectedTime === time ? color : "" }}
+            >{time}</p>
+          ))}
+        </div>
+        <div >
+          <button className="button" onClick={decreaseScroll}><BsChevronDown />
+          </button>
+        </div>
       </div>
-      <button onClick={decreaseScroll}><BsChevronDown /></button>
     </div>
   );
 };

@@ -5,11 +5,12 @@
   height: 40vh;
   flex-direction: column;
   margin-top: 5vh;
+  overflow: hidden;
 }
 
 .list {
-  /* margin-top: 0.5vw; */
-  margin-bottom: 3vw;
+  margin-top: 0.5vw;
+  margin-bottom: 2.5vw;
   z-index: 0;
   height: 26vh;
 }
@@ -20,12 +21,29 @@
 .timer .list p.selected {
   background-color:  rgb(34, 140, 34);
   color: #FFFFFF;
-  padding: 4px;
+  padding: 6px;
+  border-radius: 0.5em;
+  position: relative;
+  right: 5%;
+  
 }
 button {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
   margin: 0; 
   padding: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.head{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15vh;
+  line-height: 1.125em;
+  overflow: hidden;
+  height: 40vh;
+  position: relative;
 }
