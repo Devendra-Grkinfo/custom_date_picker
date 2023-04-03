@@ -7,9 +7,7 @@ import { useState } from "react";
 
 const Header = (props) => {
 
-    const{currentDate,setCurrentDate} = props
-    const [monthGrid, setMonthGrid] = useState(true)
-    const [dateFormat,setDateFormat] = useState("MMMM yyyy")
+    const{currentDate,setCurrentDate,dateFormat,setActive,active,setDateFormat} = props
 
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));
@@ -17,9 +15,14 @@ const Header = (props) => {
      const prevMonth = () => {
         setCurrentDate(subMonths(currentDate, 1));
      }  
-     const onClickMonth =()=> {
-         setMonthGrid(!monthGrid)
-         setDateFormat("yyyy")
+     const onClick =()=> {
+      if (active<3) {
+         setActive(active+1)
+            setDateFormat("yyyy")
+      } else {
+         setActive(1)
+      }
+      
      }
 
 
@@ -32,7 +35,7 @@ const Header = (props) => {
        </button>
     </div>
     <div>
-       <button className="header-icon" onClick={onClickMonth}>{format(currentDate, dateFormat)}</button>
+       <button className="header-icon"  onClick={onClick}>{format(currentDate, dateFormat)}</button>
     </div>
     <div>
        <button className="header-icon" onClick={nextMonth}>
