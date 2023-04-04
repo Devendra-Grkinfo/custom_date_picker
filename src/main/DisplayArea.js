@@ -6,7 +6,7 @@ import Timer from "../timer/Timer";
 const DisplayArea = (props) => {
 
  
-  const {  time, setTime,showTimer,color ,numIntervals } = props;
+  const {  time, setTime,showTimer,selectedColor ,numIntervals } = props;
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += 1) {
@@ -21,7 +21,7 @@ const DisplayArea = (props) => {
     <div className="display">
       <span className="display1">
         <Calender currentDate ={currentDate} setCurrentDate ={setCurrentDate} selectedDate ={selectedDate} setSelectedDate = {setSelectedDate} />
-       {showTimer ?<Timer time={times} selectedTime={time} setTime={setTime} numIntervals={numIntervals} color={color} />:null} 
+       {showTimer ?<Timer time={times} selectedTime={time} setTime={setTime} numIntervals={numIntervals} selectedColor={selectedColor} />:null} 
       </span>
     </div>
   );
