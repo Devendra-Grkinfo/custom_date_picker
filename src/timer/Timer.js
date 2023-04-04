@@ -21,24 +21,21 @@ const Timer = (props) => {
     }
   }, [selectedTime, time]);
 
-
-  const increaseScroll = (speed) => {
+  const increaseScroll = () => {
     //setIndex((index + 1) % time.length);
-    const amount = speed === "slow" ? 1 : 1;
     if (index === time.length - numIntervals) {
       setIndex(0);
     } else {
-      setIndex(index + amount);
+      setIndex(index + 1);
     }
   };
 
-  const decreaseScroll = (speed) => {
+  const decreaseScroll = () => {
     //   setIndex((index - 1 + time.length) % time.length);
-    const amount = speed === "slow" ? 1 : 1;
     if (index === 0) {
       setIndex(time.length - numIntervals);
     } else {
-      setIndex(index - amount);
+      setIndex(index - 1);
     }
   };
 
@@ -62,13 +59,12 @@ const Timer = (props) => {
     if (prevMouseY !== null) {
       const scrollDirection = (scrollDelta - prevMouseY);
       if (scrollDirection < 0) {
-        decreaseScroll();
+        setTimeout(() => decreaseScroll(), 200);
       } else {
-        increaseScroll();
+        setTimeout(() => increaseScroll(), 200);
       }
     }
     setPrevMouseY(scrollDelta);
-     setTimeout(() => setPrevMouseY(null), 1000);
   };
   
  
