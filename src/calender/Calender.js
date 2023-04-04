@@ -1,32 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import './calender.css'
 import Header from "./components/Header";
-import MonthGrid from "./components/MonthView/MonthGrid";
 import DateView from "./components/WeekDateView/DateView";
-import YearList from "./components/YearView/YearList";
+import MonthGrid from './components/MonthView/MonthGrid'
 
+import { useState } from "react";
+import YearInterval from "./components/YearView/YearInterval";
 
 const Calender = (props) => {
 
+const [dateFormat,setDateFormat] = useState("MMMM yyyy")
+const [render,setRender]=useState(1)
+const [interval,setInterval] = useState(2000)
+
 const{currentDate,setCurrentDate,selectedDate,setSelectedDate}=props
-const [active,setActive]=useState(1)
-const [dateFormat, setDateFormat] = useState('MMMM yyyy')
+
 
   return (
     <div className="calendar">
-          <Header setActive={setActive} active={active} dateFormat={dateFormat}  setDateFormat={setDateFormat}  currentDate={currentDate} setCurrentDate={setCurrentDate}   selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-      { active===1 && 
-      <DateView currentDate={currentDate} setCurrentDate={setCurrentDate}   selectedDate={selectedDate} setSelectedDate={setSelectedDate}/> 
-      }
-      { active ===2 && 
-      <YearList currentDate={currentDate} setCurrentDate={setCurrentDate}/>
-      }
-      { active ===3 && 
-      <MonthGrid currentDate={currentDate} setCurrentDate={setCurrentDate} setActive={setActive} active={active} />
-      }
+    <Header currentDate={currentDate} setCurrentDate={setCurrentDate} render={render} setRender={setRender}  dateFormat={dateFormat} setDateFormat={setDateFormat} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+    {render===1 && <>
+    <DateView currentDate={currentDate} setCurrentDate={setCurrentDate}   selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+    </> }
+    { render===2 &&<>
+      <MonthGrid currentDate={currentDate}  setCurrentDate={setCurrentDate}/>
+    </>
+    }
+    { render===3 &&<>
+      <YearInterval currentDate={currentDate} interval={interval} setCurrentDate={setCurrentDate}/>
+    </>
+    }
     </div>
   );
 };
 
 export default Calender;
- 
