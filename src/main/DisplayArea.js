@@ -6,7 +6,7 @@ import Timer from "../timer/Timer";
 const DisplayArea = (props) => {
 
  
-  const {  time, setTime,showTimer,selectedColor ,numIntervals } = props;
+  const {currentDate,setCurrentDate,selectedDate,setSelectedDate,time,setTime,showTimer,selectedColor,numIntervals } = props;
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += 1) {
@@ -14,8 +14,6 @@ const DisplayArea = (props) => {
       times.push(time);
     }
   }
-  const [currentDate, setCurrentDate] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date())
 
   return (
     <div className="display">
