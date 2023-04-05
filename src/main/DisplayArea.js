@@ -1,6 +1,5 @@
 import React from "react";
 import Calender from "../calender/Calender";
-import { useState } from "react";
 import Timer from "../timer/Timer";
 
 const DisplayArea = (props) => {

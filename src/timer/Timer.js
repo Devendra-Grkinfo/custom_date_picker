@@ -12,7 +12,9 @@ const Timer = (props) => {
     const selectedIndex = time.indexOf(selectedTime);
     return selectedIndex === -1 ? 0 : selectedIndex;
   });
+
   const [prevMouseY, setPrevMouseY] = useState(null);
+  const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
     const selectedIndex = time.indexOf(selectedTime);
@@ -45,12 +47,24 @@ const Timer = (props) => {
 
   const handleWheel = (e) => {
     e.preventDefault();
-    const delta = e.deltaY  ;
+    if (!dragging) {
+      return;
+    }
+    const delta = e.deltaY;
     listRef.current.scroll += delta;
+  };
+  const handleStartDrag = (e) => {
+    setPrevMouseY(e.clientY);
+    setDragging(true);
+  };
+
+  const handleStopDrag = () => {
+    setPrevMouseY(null);
+    setDragging(false);
   };
 
   const handleMouseMove = (e) => {
-    if (!listRef.current) return;
+    if (!listRef.current || !dragging) return;
 
     const { clientY } = e;
     const { top, height } = listRef.current.getBoundingClientRect();
@@ -59,15 +73,17 @@ const Timer = (props) => {
     if (prevMouseY !== null) {
       const scrollDirection = (scrollDelta - prevMouseY);
       if (scrollDirection < 0) {
-        setTimeout(() => decreaseScroll(), 200);
+        decreaseScroll();
+        // setTimeout(() => decreaseScroll(), 200);
       } else {
-        setTimeout(() => increaseScroll(), 200);
+        increaseScroll();
+        // setTimeout(() => increaseScroll(), 200);
       }
     }
     setPrevMouseY(scrollDelta);
   };
-  
- 
+
+
   const isLastTimeValue = time[time.length - 1] === "23:59";
   const circularTime = isLastTimeValue ? ["00:00", ...time, "00:00"] : time;
 
@@ -83,7 +99,7 @@ const Timer = (props) => {
           <button className="button" onClick={increaseScroll}><BsChevronUp />
           </button>
         </div>
-        <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove}  >
+        <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove} onMouseDown={handleStartDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag} >
           {circularTime.slice(index, index + numIntervals).map((time) => (
             <p key={time} onClick={() => handleTimeSelection(time)}
               className={selectedTime === time ? "selected" : ""}
