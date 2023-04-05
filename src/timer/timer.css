@@ -33,6 +33,9 @@
   right: 5%;
   
 }
+.timer p {
+  user-select: none; 
+}
 button {
   background-color: rgb(255, 255, 255);
   border: none;
