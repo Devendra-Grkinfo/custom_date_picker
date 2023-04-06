@@ -84,3 +84,10 @@
   justify-content: center;
   cursor: pointer;
 }
+
+.yearGrid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    gap: 3vw;
+}

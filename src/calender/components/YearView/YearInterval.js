@@ -1,25 +1,30 @@
 import React from 'react'
 import { eachYearOfInterval } from 'date-fns'
-
+import { object } from 'prop-types'
+ 
 
 const YearInterval = (props) => {
 
-const {interval} = props
+const {upperInterval,lowerInterval} = props
 
-const firstInterval = new Date(interval,0);
-const endInterval = new Date(interval+9,0)
+// const firstInterval = upperInterval
+// const endInterval = lowerInterval
 
-const timeInterval = eachYearOfInterval({start:firstInterval,end:endInterval})
-const YearInterval = [];
- for (let i = 0; i < 10; i++) {
-    YearInterval.push(timeInterval);
+let timeInterval = eachYearOfInterval({start:upperInterval,end:lowerInterval})
+ 
+//   const yearInterval = Object.keys(timeInterval).map((keys)=>{
+//     return [timeInterval]
+//   })
+const yearInterval =[];
+ for (let i = 0; i < timeInterval.length; i++) {
+    yearInterval.push(Object.values(timeInterval[i]));
   }
- console.log(timeInterval)
+ console.log(typeof(timeInterval))
+ console.log(yearInterval[1])
   return (
     <div>
-    {
-        YearInterval.map((year)=>(
-            <div>{getFullYear(year)}</div>
+    {yearInterval.map((year)=>(
+            <div>{year}</div>
         ))
     }  
     </div>
