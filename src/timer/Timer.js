@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './timer.css'
 import { BsChevronUp } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
 
 
 const Timer = (props) => {
+  const listRef = useRef(null);
+  const { time, setTime, selectedTime, numIntervals = 5, selectedColor } = props;
 
-  const { time, setTime, selectedTime, numIntervals = 5, color } = props;
   const [index, setIndex] = useState(() => {
     const selectedIndex = time.indexOf(selectedTime);
     return selectedIndex === -1 ? 0 : selectedIndex;
   });
+
+  const [prevMouseY, setPrevMouseY] = useState(null);
+  const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
     const selectedIndex = time.indexOf(selectedTime);
@@ -18,7 +22,6 @@ const Timer = (props) => {
       setIndex(selectedIndex);
     }
   }, [selectedTime, time]);
-
 
   const increaseScroll = () => {
     //setIndex((index + 1) % time.length);
@@ -42,6 +45,45 @@ const Timer = (props) => {
     setTime(selectedTime);
   };
 
+  const handleWheel = (e) => {
+    e.preventDefault();
+    if (!dragging) {
+      return;
+    }
+    const delta = e.deltaY;
+    listRef.current.scroll += delta;
+  };
+  const handleStartDrag = (e) => {
+    setPrevMouseY(e.clientY);
+    setDragging(true);
+  };
+
+  const handleStopDrag = () => {
+    setPrevMouseY(null);
+    setDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!listRef.current || !dragging) return;
+
+    const { clientY } = e;
+    const { top, height } = listRef.current.getBoundingClientRect();
+    const scrollDelta = (clientY - top) / height;
+
+    if (prevMouseY !== null) {
+      const scrollDirection = (scrollDelta - prevMouseY);
+      if (scrollDirection < 0) {
+        decreaseScroll();
+        // setTimeout(() => decreaseScroll(), 200);
+      } else {
+        increaseScroll();
+        // setTimeout(() => increaseScroll(), 200);
+      }
+    }
+    setPrevMouseY(scrollDelta);
+  };
+
+
   const isLastTimeValue = time[time.length - 1] === "23:59";
   const circularTime = isLastTimeValue ? ["00:00", ...time, "00:00"] : time;
 
@@ -57,11 +99,11 @@ const Timer = (props) => {
           <button className="button" onClick={increaseScroll}><BsChevronUp />
           </button>
         </div>
-        <div className="list" >
+        <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove} onMouseDown={handleStartDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag} >
           {circularTime.slice(index, index + numIntervals).map((time) => (
             <p key={time} onClick={() => handleTimeSelection(time)}
               className={selectedTime === time ? "selected" : ""}
-              style={{ backgroundColor: selectedTime === time ? color : "" }}
+              style={{ backgroundColor: selectedTime === time ? selectedColor : "" }}
             >{time}</p>
           ))}
         </div>

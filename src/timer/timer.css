@@ -12,7 +12,13 @@
   margin-top: 0.5vw;
   margin-bottom: 2.5vw;
   z-index: 0;
-  height: 26vh;
+  height: 28vh;
+  /* overflow-y: scroll;
+  scrollbar-width: none;  */
+  /* -ms-overflow-style: none; */
+}
+.list::-webkit-scrollbar {
+  width: 0px; 
 }
 .timer p:hover {
   cursor: pointer;
@@ -21,11 +27,14 @@
 .timer .list p.selected {
   background-color:  rgb(34, 140, 34);
   color: #FFFFFF;
-  padding: 6px;
+  padding: 5px;
   border-radius: 0.5em;
   position: relative;
   right: 5%;
   
+}
+.timer p {
+  user-select: none; 
 }
 button {
   background-color: rgb(255, 255, 255);
