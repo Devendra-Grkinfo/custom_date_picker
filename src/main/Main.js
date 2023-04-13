@@ -7,6 +7,8 @@ const Main = () => {
   
   const [open, setOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date())
+  // const [year,setYear]=useState(new Date().getFullYear())
+  // const [month,setMonth]=useState(new Date().getMonth())
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [time, setTime] = useState("00:00 AM");
 
@@ -14,19 +16,23 @@ const Main = () => {
     setOpen(!open);
   };
 
+// console.log(currentDate)
   return (
     <div className="main">
       <div>
         <input
           onClick={handleOpen} readOnly
           placeholder="Enter date and time "
-          value={currentDate.toDateString() + " " + time}
+          value={currentDate.toDateString()+ " " + time}
           onChange={(e) => setTime(e.target.value)}
         />
       </div>
       {open && (
-        <div onMouseLeave={() => setOpen(false)}>
+        < >
           <DisplayArea
+          autoFocus
+          open={open}
+          setOpen={setOpen}
             currentDate ={currentDate} 
             setCurrentDate ={setCurrentDate} 
             selectedDate ={selectedDate} 
@@ -37,8 +43,15 @@ const Main = () => {
             numIntervals={5}
             selectedColor="forest green"
           />
-        </div>
+        </>
       )}
+      <div>
+      <p>below display area</p>
+          <p>below display area</p>
+          <p>below display area</p>
+          <p>below display area</p>
+          <p>below display area</p>
+      </div>
 </div>
   );
 };

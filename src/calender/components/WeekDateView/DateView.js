@@ -1,16 +1,27 @@
-import React from 'react'
-import DaysOfWeek from './DaysOfWeek'
-import Cells from './Cells'
-
+import React from "react";
+import Cells from "./Cells";
 
 const DateView = (props) => {
-    const{currentDate,setCurrentDate,setSelectedDate,selectedDate} = props
-  return (
-    <>
-    <DaysOfWeek currentDate={currentDate} setCurrentDate={setCurrentDate}   />
-    <Cells currentDate={currentDate} setCurrentDate={setCurrentDate}    selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-    </>
-  )
-}
+  const { currentDate, setCurrentDate, setSelectedDate, selectedDate } = props;
 
-export default DateView
+  const day = [" sun ", " mon ", " tue ", " wed ", " thu ", " fri ", " sat "];
+
+  return (
+    <div className="dateview">
+      <div className="weekdays">
+        {day.map((day) => (
+          <div key={day}>{day}</div>
+        ))}
+      </div>
+
+      <Cells
+        currentDate={currentDate}
+        setCurrentDate={setCurrentDate}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
+    </div>
+  );
+};
+
+export default DateView;

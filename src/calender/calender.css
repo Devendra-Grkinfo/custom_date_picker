@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   width: 30vw;
   flex-direction: row;
@@ -8,86 +8,163 @@
   align-items: center;
   margin-top: 3vh;
 }
-.dateview{
+.dateview {
   display: flex;
   flex-direction: column;
 }
-.days{
+.weekdays {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 3vh;
 }
-.row{
+.row {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 1vh;
 }
-.body{
+/* .body {
   display: flex;
   flex-direction: column;
   margin-top: 3vh;
-}
-.calendar{
+} */
+.calendar {
   box-sizing: border-box;
-  width: 30vw;
+  width: 27.5vw;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
-.selected{
+.selected {
   background-color: rgb(34, 140, 34);
   color: white;
+  padding: 3px;
+  font-size:medium;
+  border-radius: 10px;
 }
-.disabled{
+.disabled {
   color: rgb(122, 121, 121);
+  padding: 3px;
+  font-size:medium;
+  border-radius: 10px;
 }
-.header-icon{
+.disabled:hover{
+  background-color: rgb(171, 245, 171);
+  
+}
+.notSelected{
+  color: rgb(30, 30, 30);
+  padding: 3px;
+  font-size:medium;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.header-icon {
   background-color: white;
   border: none;
   cursor: pointer;
-  padding: 0; 
+  padding: 0;
   margin-right: 10px;
 }
-.months{
+/* .months {
   margin-top: 3vw;
-  /* margin-left: 2vw; */
+  margin-left: 2vw;
   display: flex;
-}
-.monthGrid{
-  /* display: flex;
-  flex-direction:row;
-  flex-wrap: wrap; */
-  /* gap:1vw; */
+} */
+.monthGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1vw;
   display: grid;
   grid-template-columns: auto auto auto;
   /* background-color: #2196F3; */
   padding: 10px;
   gap: 3vw;
 }
-.selectedMonth{
-  background-color: rgb(131, 193, 240);
+.selectedMonth {
+  background-color:rgb(34, 140, 34);
   display: flex;
   flex: 25%;
   margin-top: 1vw;
   justify-content: center;
   height: 4vh;
-  border-radius:70px;
+  border-radius: 40px;
   cursor: pointer;
+  color: white;
 }
-.disabledMonth{
+.disabledMonth {
   background-color: white;
-  height:4vh;
+  height: 4vh;
   display: flex;
   flex: 25%;
   margin-top: 1vw;
   justify-content: center;
   cursor: pointer;
 }
-
-.yearGrid{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 10px;
-    gap: 3vw;
+.disabledMonth:hover{
+  background-color:rgb(134, 251, 134) ;
+  border-radius: 40px;
+  padding: 5px;
 }
+.yearGrid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  gap: 3vw;
+}
+.selectedYear{
+  background-color: rgb(34, 140, 34);
+  color: white;
+}
+.disabledYear:hover{
+  background-color: rgb(171, 245, 171);
+}
+.rangeGrid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2vw;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* background-color: #2196F3; */
+  padding: 10px;
+  /* gap: 3vw; */
+}
+
+/* .calendar-container{
+  min-width: 30vw;
+}
+
+.calendar-container header {
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+header .calendar-navigation button {
+  height: 18px;
+  width: 18px;
+  margin: 0 1px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  user-select: none;
+  color: #aeabab;
+  font-size: 1.9rem;
+}
+header .calendar-navigation button:hover {
+  background: #f2f2f2;
+} 
+
+
+
+
+ul{
+  list-style: none;
+}
+.calendar-weekdays{
+  display: flex;
+  flex-direction: column;
+} */
