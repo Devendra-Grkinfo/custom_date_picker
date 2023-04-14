@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import './timer.css'
 import { BsChevronUp } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
@@ -6,43 +6,63 @@ import { BsChevronDown } from "react-icons/bs";
 
 const Timer = (props) => {
   const listRef = useRef(null);
-  const { time, setTime, selectedTime, numIntervals = 5, selectedColor } = props;
+  const { time, setTime, selectedTime, listIntervals = 5, selectedColor } = props;
+  const selectedIndex = time.indexOf(selectedTime);
 
   const [index, setIndex] = useState(() => {
-    const selectedIndex = time.indexOf(selectedTime);
-    return selectedIndex === -1 ? 0 : selectedIndex;
+    return selectedIndex === -1 ? 0 : selectedIndex
   });
 
   const [prevMouseY, setPrevMouseY] = useState(null);
   const [dragging, setDragging] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
 
-  useEffect(() => {
-    const selectedIndex = time.indexOf(selectedTime);
+  useLayoutEffect(() => {
+    let selectedIndex = time.indexOf(selectedTime);
+    // console.log(index);
     if (selectedIndex !== -1) {
-      setIndex(selectedIndex);
+      let centerIndex = Math.max(selectedIndex - Math.floor(listIntervals / 2));
+      setIndex(centerIndex);
     }
-  }, [selectedTime, time]);
+  }, [selectedTime, time, listIntervals]);
 
   const increaseScroll = () => {
-    //setIndex((index + 1) % time.length);
-    if (index === time.length - numIntervals) {
+    if (index === time.length - 1) {
       setIndex(0);
+    } else if (index === 0) {
+      setIndex(index + 1);
     } else {
       setIndex(index + 1);
     }
+    setButtonClicked(true);
   };
 
   const decreaseScroll = () => {
-    //   setIndex((index - 1 + time.length) % time.length);
     if (index === 0) {
-      setIndex(time.length - numIntervals);
+      setIndex(time.length - 1);
+    } else if (index === time.length - 1) {
+      setIndex(index - 1);
     } else {
       setIndex(index - 1);
     }
+    setButtonClicked(true);
   };
+
+  useEffect(() => {
+    if (buttonClicked) {
+      let newSelectedTime = circularTime[Math.floor(listIntervals / 2)];
+      if (newSelectedTime !== selectedTime) {
+        setTime(newSelectedTime);
+      }
+      setButtonClicked(false);
+    }
+  }, [index]);
 
   const handleTimeSelection = (selectedTime) => {
     setTime(selectedTime);
+    const selectedIndex = time.indexOf(selectedTime);
+    const centerIndex = Math.max(selectedIndex - Math.floor(listIntervals / 2));
+    setIndex(centerIndex);
   };
 
   const handleWheel = (e) => {
@@ -79,18 +99,20 @@ const Timer = (props) => {
         increaseScroll();
         // setTimeout(() => increaseScroll(), 200);
       }
+      // let newSelectedTime = circularTime[Math.floor(listIntervals / 2)];
+      // if (newSelectedTime !== selectedTime) {
+      //   setTime(newSelectedTime);
+      // }
     }
     setPrevMouseY(scrollDelta);
   };
+  const circularTime = [...time.slice(index), ...time.slice(0, index)];
 
-
-  const isLastTimeValue = time[time.length - 1] === "23:59";
-  const circularTime = isLastTimeValue ? ["00:00", ...time, "00:00"] : time;
-
-  if (index + numIntervals > circularTime.length) {
-    const remaining = index + numIntervals - circularTime.length;
+  if (index + listIntervals > circularTime.length) {
+    const remaining = index + listIntervals - circularTime.length;
     circularTime.push(...circularTime.slice(0, remaining));
   }
+  // console.log(circularTime.length)
 
   return (
     <div className="timer" >
@@ -100,9 +122,9 @@ const Timer = (props) => {
           </button>
         </div>
         <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove} onMouseDown={handleStartDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag} >
-          {circularTime.slice(index, index + numIntervals).map((time) => (
+          {circularTime.slice(0, listIntervals).map((time, i) => (
             <p key={time} onClick={() => handleTimeSelection(time)}
-              className={selectedTime === time ? "selected" : ""}
+              className={`list-item ${i === Math.floor(listIntervals / 2) ? "selected" : ""}`}
               style={{ backgroundColor: selectedTime === time ? selectedColor : "" }}
             >{time}</p>
           ))}
