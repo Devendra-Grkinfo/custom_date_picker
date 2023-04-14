@@ -5,28 +5,35 @@ import { useEffect } from "react";
 
 const DisplayArea = (props) => {
 
-  let displayRef=useRef()
-  useEffect(()=>{
-    document.addEventListener('mousedown',(event)=>{
-      if(displayRef.current && !displayRef.current.contains(event.target)){
+  let displayRef = useRef()
+  useEffect(() => {
+    document.addEventListener('mousedown', (event) => {
+      if (displayRef.current && !displayRef.current.contains(event.target)) {
         setOpen(!open)
       }
     })
   })
- 
-  const {currentDate,setCurrentDate,selectedDate,setSelectedDate,time,setTime,showTimer,selectedColor,numIntervals,setOpen,open } = props;
+
+  const { currentDate, setCurrentDate, selectedDate, setSelectedDate, time, setTime, showTimer, selectedColor, listIntervals, setOpen, open, timeInterval } = props;
+
+
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
-    for (let minute = 0; minute < 60; minute += 1) {
-      const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`;
+    for (let minute = 0; minute < 60; minute += timeInterval) {
+      let tempHour = hour === 0 || hour === 12 ? 12 : hour > 12 ? hour - 12 : hour;
+      const time = `${tempHour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`;
       times.push(time);
     }
   }
+  console.log(times);
 
   return (
-    <div className="display"  ref={displayRef}>
-      <Calender currentDate ={currentDate} setCurrentDate ={setCurrentDate} selectedDate ={selectedDate} setSelectedDate = {setSelectedDate} />
-       {showTimer ?<Timer time={times} selectedTime={time} setTime={setTime} numIntervals={numIntervals} selectedColor={selectedColor} />:null} 
+
+    <div className="display" ref={displayRef}>
+      <span className="calender">
+        <Calender currentDate={currentDate} setCurrentDate={setCurrentDate} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+        {showTimer ? <Timer time={times} selectedTime={time} setTime={setTime} listIntervals={listIntervals} selectedColor={selectedColor} /> : null}
+      </span>
     </div>
   );
 };
