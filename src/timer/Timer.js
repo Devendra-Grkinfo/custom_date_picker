@@ -1,7 +1,7 @@
 import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import './timer.css'
-import { BsChevronUp } from "react-icons/bs";
-import { BsChevronDown } from "react-icons/bs";
+import { RiArrowUpSLine } from "react-icons/ri";
+import { RiArrowDownSLine} from "react-icons/ri";
 
 
 const Timer = (props) => {
@@ -118,7 +118,7 @@ const Timer = (props) => {
     <div className="timer" >
       <div className="head">
         <div >
-          <button className="button" onClick={increaseScroll}><BsChevronUp />
+          <button className="button" onClick={increaseScroll}><RiArrowUpSLine />
           </button>
         </div>
         <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove} onMouseDown={handleStartDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag} >
@@ -130,7 +130,7 @@ const Timer = (props) => {
           ))}
         </div>
         <div >
-          <button className="button" onClick={decreaseScroll}><BsChevronDown />
+          <button className="button" onClick={decreaseScroll}><RiArrowDownSLine />
           </button>
         </div>
       </div>
