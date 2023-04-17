@@ -8,17 +8,14 @@ import {
   isSameDay,
   isSameMonth,
   addDays,
-  parse,
 } from "date-fns";
 
 const Cells = (props) => {
   const { currentDate, setCurrentDate, selectedDate, setSelectedDate ,year,month} = props;
   const onDateClick = (day) => {
-    console.log("day",day)
     setSelectedDate(day);
     setCurrentDate(day);
   };
-  console.log("cell",currentDate);
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
@@ -39,7 +36,8 @@ const Cells = (props) => {
               ? "disabled"
               : isSameDay(day, selectedDate)
               ? "selected"
-              : "notSelected"
+              : currentDate.getDate()?
+               "notSelected":""
           }`}
           key={day}
           onClick={() => onDateClick(cloneDay)}
