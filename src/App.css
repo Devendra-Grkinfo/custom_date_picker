@@ -5,14 +5,16 @@
   width: 50%;
 }
 
-input {
+.input {
   width: 42vw;
-  height: 5vh;
+  height: 2em;
   margin-top: 1em;
   border-radius: 10px;
   min-width: 200px;
   max-width: 525px;
+  display: flex;
   text-align: center;
+
 }
 
 .input-field {
@@ -21,21 +23,6 @@ input {
   justify-content: center;
 }
 
-/* .display {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  min-width: 25vw;
-  min-height: 22vh;
-  transform: translate(0,0);
-  position: absolute;
-  z-index: 2000;
-  background-color: white;
-  opacity: 100%;
-  border-radius: 10px;
-  border: 2px solid black;
-} */
 .display {
   display: flex;
   flex-wrap: wrap;
@@ -63,5 +50,10 @@ input {
   width: 100%;
   min-width: 500px;
   max-width: 800px;
-  position: relative;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+
 }
