@@ -1,7 +1,7 @@
 import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import './timer.css'
 import { RiArrowUpSLine } from "react-icons/ri";
-import { RiArrowDownSLine} from "react-icons/ri";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 
 const Timer = (props) => {
@@ -109,31 +109,27 @@ const Timer = (props) => {
   const circularTime = [...time.slice(index), ...time.slice(0, index)];
 
   if (index + listIntervals > circularTime.length) {
-    const remaining = index + listIntervals - circularTime.length;
-    circularTime.push(...circularTime.slice(0, remaining));
+    const remainingTime = index + listIntervals - circularTime.length;
+    circularTime.push(...circularTime.slice(0, remainingTime));
   }
   // console.log(circularTime.length)
 
   return (
     <div className="timer" >
-      <div className="head">
-        <div >
-          <button className="button" onClick={increaseScroll}><RiArrowUpSLine />
-          </button>
-        </div>
-        <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove} onMouseDown={handleStartDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag} >
-          {circularTime.slice(0, listIntervals).map((time, i) => (
-            <p key={time} onClick={() => handleTimeSelection(time)}
-              className={`list-item ${i === Math.floor(listIntervals / 2) ? "selected" : ""}`}
-              style={{ backgroundColor: selectedTime === time ? selectedColor : "" }}
-            >{time}</p>
-          ))}
-        </div>
-        <div >
-          <button className="button" onClick={decreaseScroll}><RiArrowDownSLine />
-          </button>
-        </div>
+      <button className="button" onClick={increaseScroll}>
+        <RiArrowUpSLine />
+      </button>
+      <div className="list" ref={listRef} onWheel={handleWheel} onMouseMove={handleMouseMove} onMouseDown={handleStartDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag} >
+        {circularTime.slice(0, listIntervals).map((time, i) => (
+          <p key={time} onClick={() => handleTimeSelection(time)}
+            className={`list-item ${i === Math.floor(listIntervals / 2) ? "selected" : ""}`}
+            style={{ backgroundColor: selectedTime === time ? selectedColor : "" }}
+          >{time}</p>
+        ))}
       </div>
+      <button className="button" onClick={decreaseScroll}>
+        <RiArrowDownSLine />
+      </button>
     </div>
   );
 };

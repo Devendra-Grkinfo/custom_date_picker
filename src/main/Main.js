@@ -9,14 +9,14 @@ const Main = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [time, setTime] = useState("12:00 AM");
   const [inputValue, setInputValue] = useState("");
-  const [clicked, setClicked] = useState(false);
+  const [isInputClicked, setIsInputClicked] = useState(false);
 
 
   const handleOpen = () => {
     setOpen(true);
-    setClicked(true);
+    setIsInputClicked(true);
   };
-
+ 
   const handleInputChange = (e) => {
     const value = e.target.value;
     if (value === "") {
@@ -45,19 +45,14 @@ const Main = () => {
 
   useEffect(() => {
     if (currentDate && time) {
-      const formattedValue = `${currentDate.toDateString()} ${time}`;
-      setInputValue(formattedValue);
-    }
-  }, [currentDate, time]);
-
-  useEffect(() => {
-    if (currentDate && time) {
-      const formattedValue = `${currentDate.toDateString()} ${time}`;
+      let formattedValue = `${currentDate.toDateString()} ${time}`;
       setInputValue(formattedValue);
     }
   }, [currentDate, time]);
 
   // console.log(currentDate)
+  const inputDisplayValue = isInputClicked ? inputValue : "";
+  
   return (
     <div className="main">
       <div className="input-field">
@@ -65,37 +60,33 @@ const Main = () => {
           onClick={handleOpen}
           readOnly
           placeholder="Select a date and time"
-          value={clicked ? inputValue : ""}
+          value={inputDisplayValue}
           onChange={handleInputChange}
           className="input"
         />
       </div>
       {open && (
-        <div >
-          <DisplayArea
-            autoFocus
-            open={open}
-            setOpen={setOpen}
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-            time={time}
-            setTime={setTime}
-            showTimer={true}
-            listIntervals={5}
-            timeInterval={60}
-            selectedColor="forest green"
-          />
-        </div>
+        <DisplayArea
+          autoFocus
+          open={open}
+          setOpen={setOpen}
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          time={time}
+          setTime={setTime}
+          showTimer={true}
+          listIntervals={5}
+          timeInterval={60}
+          selectedColor="forest green"
+        />
       )}
-      <div>
-        <p>below display area</p>
-        <p>below display area</p>
-        <p>below display area</p>
-        <p>below display area</p>
-        <p>below display area</p>
-      </div>
+      <p className="center">below display area</p>
+      <p className="center">below display area</p>
+      <p className="center">below display area</p>
+      <p className="center">below display area</p>
+      <p className="center">below display area</p>
     </div>
   );
 };
