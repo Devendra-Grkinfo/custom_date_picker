@@ -1,73 +1,47 @@
-import React,{useState} from 'react'
-import { eachYearOfInterval } from 'date-fns'
-import { object } from 'prop-types'
- 
+import React, { useState } from "react";
 
 const YearInterval = (props) => {
+  const {
+    currentDate,
+    setCurrentDate,
+    decadeStart,
+    month,
+    year,
+    setYear,
+    selectedDate,
+  } = props;
+ const[activeYear,setActiveYear]=useState(new Date().getFullYear())
+  const endYear = decadeStart + 9;
 
-  const{currentDate,setCurrentDate,decadeStart,month,year,setYear,selectedDate} = props
+  const decadeYears = [];
+  for (let decade = decadeStart - 1; decade <= endYear + 1; decade++) {
+    decadeYears.push(decade);
+  }
 
-//  const firstInterval = upperInterval
-//  const endInterval = lowerInterval
-
-// let timeInterval = eachYearOfInterval({start:upperInterval,end:lowerInterval})
- 
-//   const yearInterval = Object.keys(timeInterval).map((keys)=>{
-//      return [timeInterval]
-//   })
-// const yearInterval =[];
-//  for (let i = 0; i < timeInterval.length; i++) {
-//     yearInterval.push(Object.values(timeInterval[i]));
-//   }
-//  console.log(typeof(timeInterval))
-//  console.log(yearInterval[1])
-//  const [selectedYear, setSelectedYear] = useState(null);
-// const month = currentDate.getMonth()
-
-  const handleYearClick = (year) => {
-    console.log(year)
-    setYear(year)
-    setCurrentDate(new Date(year,month,selectedDate.getDate()));
+  const handleYearClick = (years) => {
+    console.log(years);
+    setYear(years);
+    setCurrentDate(new Date(years, month, currentDate.getDate()));
   };
 
-  // const renderYears = () => {
-  //   const years = [];
-    // let year = decadeStart
-    const decadeYears = Array.from({ length: 10 }, (_, index) => decadeStart + index);
-    // console.log(decadeYears)
-
-    const decadeEnd = decadeStart+10;
-  //   for (let i = 0; i < 9; i++) {
-  //     years.push(
-  //       <div
-  //         key={year}
-  //         className={`year ${selectedYear === year ? 'selected' : ''}`}
-  //         onClick={() => handleYearClick(year)}
-  //       >
-  //         {year}
-  //       </div>
-  //     );
-  //     year++;
-  //   }
-
-  //   return years;
-  // };
-
   return (
-    <div>
-        <div className="yearGrid">
-        <div className='years'>{decadeStart-1}</div>
-        {    decadeYears.map((decade,i) => (
-      <div key={i} className={`${decade === currentDate.getFullYear() ? "selectedYear":"disabledYear"}`} onClick={() =>handleYearClick(decade)} >{decade}</div>
-    ))}
-        <div className='years'>{decadeEnd}</div>
+    <div className="yearGrid">
+      {decadeYears.map((years) => (
+        <div
+          key={years}
+          className={`${
+              years === year ? "selectedYear" : years === activeYear ? "activeYear" :"disabledYear"
+            }`}
+          // className={` ${
+          //   years === year ? "selectedYear" : "disabledYear"
+          // }`}
+          onClick={() => handleYearClick(years)}
+        >
+          {years}
+        </div>
+      ))}
     </div>
-    {/* {yearInterval.map((year)=>(
-            <div>{year}</div>
-        ))
-    }   */}
-    </div>
-  )
-}
+  );
+};
 
-export default YearInterval
+export default YearInterval;

@@ -1,0 +1,37 @@
+
+.monthGrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    row-gap: 40px;
+    column-gap: normal;
+    margin-top: 5%;
+    align-items: center;
+  }
+  .selectedMonth {
+    background-color:rgb(34, 140, 34);
+    display: flex;;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+  }
+  .disabledMonth {
+    background-color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  .disabledMonth:hover{
+    background-color:rgb(134, 251, 134) ;
+    border-radius: 40px;
+  }
+  .activeMonth{
+    border: 2px solid red;
+    border-radius: 5px;
+  }

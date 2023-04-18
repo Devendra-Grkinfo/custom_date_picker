@@ -55,7 +55,7 @@ const Main = () => {
   
   return (
     <div className="main">
-      <div className="input-field">
+      {/* <div className="input-field"> */}
         <input
           onClick={handleOpen}
           readOnly
@@ -64,7 +64,7 @@ const Main = () => {
           onChange={handleInputChange}
           className="input"
         />
-      </div>
+      {/* </div> */}
       {open && (
         <DisplayArea
           autoFocus
