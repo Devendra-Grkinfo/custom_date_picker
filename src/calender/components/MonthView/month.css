@@ -5,7 +5,7 @@
     padding: 10px;
     row-gap: 40px;
     column-gap: normal;
-    margin-top: 3vh;
+    margin-top: 5%;
     align-items: center;
   }
   .selectedMonth {
@@ -30,4 +30,8 @@
   .disabledMonth:hover{
     background-color:rgb(134, 251, 134) ;
     border-radius: 40px;
+  }
+  .activeMonth{
+    border: 2px solid red;
+    border-radius: 5px;
   }

@@ -24,14 +24,14 @@ const DisplayArea = (props) => {
       times.push(time);
     }
   }
-  console.log(times);
+  // console.log(times);
 
   return (
     <div className="display" ref={displayRef}>
-      <div className="calender">
+      {/* <div className="calender"> */}
         <Calender currentDate={currentDate} setCurrentDate={setCurrentDate} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         {showTimer ? <Timer time={times} selectedTime={time} setTime={setTime} listIntervals={listIntervals} selectedColor={selectedColor} /> : null}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

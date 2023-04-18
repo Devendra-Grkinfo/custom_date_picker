@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   format,
   startOfMonth,
@@ -11,7 +11,15 @@ import {
 } from "date-fns";
 
 const Cells = (props) => {
-  const { currentDate, setCurrentDate, selectedDate, setSelectedDate ,year,month} = props;
+  const {
+    currentDate,
+    setCurrentDate,
+    selectedDate,
+    setSelectedDate,
+    year,
+    month,
+  } = props;
+  const [activeDay, setActiveDay] = useState(new Date());
   const onDateClick = (day) => {
     setSelectedDate(day);
     setCurrentDate(day);
@@ -31,14 +39,15 @@ const Cells = (props) => {
       const cloneDay = day;
       days.push(
         <div
-          className={` ${
-            !isSameMonth(day, monthStart)
-              ? "disabled"
-              : isSameDay(day, selectedDate)
-              ? "selected"
-              : currentDate.getDate()?
-               "notSelected":""
-          }`}
+                    className={`${
+              !isSameMonth(day, monthStart)
+                ? "disabled"
+                : isSameDay(day, selectedDate)
+                ? "selected"
+                : isSameDay(day, activeDay)
+                ? "active"
+                : ""
+            }`}
           key={day}
           onClick={() => onDateClick(cloneDay)}
         >
@@ -50,13 +59,12 @@ const Cells = (props) => {
     }
     rows.push(
       <div className="row" key={day}>
-        {" "}
-        {days}{" "}
+        {days}
       </div>
     );
     days = [];
   }
-  return <div className="body">{rows}</div>;
+  return <div className="cell-body">{rows}</div>;
 };
 
 export default Cells;
