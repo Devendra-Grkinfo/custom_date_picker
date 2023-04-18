@@ -5,6 +5,8 @@ import { useEffect } from "react";
 
 const DisplayArea = (props) => {
 
+  const { currentDate, setCurrentDate, selectedDate, setSelectedDate, time, setTime, showTimer, selectedColor,listIntervals, setOpen, open, timeInterval } = props;
+
   let displayRef = useRef()
   useEffect(() => {
     document.addEventListener('mousedown', (event) => {
@@ -12,11 +14,8 @@ const DisplayArea = (props) => {
         setOpen(!open)
       }
     })
-  })
-
-  const { currentDate, setCurrentDate, selectedDate, setSelectedDate, time, setTime, showTimer, selectedColor, listIntervals, setOpen, open, timeInterval } = props;
-
-
+  },[])
+  
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += timeInterval) {
@@ -28,12 +27,11 @@ const DisplayArea = (props) => {
   console.log(times);
 
   return (
-
     <div className="display" ref={displayRef}>
-      <span className="calender">
+      <div className="calender">
         <Calender currentDate={currentDate} setCurrentDate={setCurrentDate} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         {showTimer ? <Timer time={times} selectedTime={time} setTime={setTime} listIntervals={listIntervals} selectedColor={selectedColor} /> : null}
-      </span>
+      </div>
     </div>
   );
 };
