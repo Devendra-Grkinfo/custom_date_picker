@@ -42,7 +42,7 @@
   position: relative;
   right: 5%;
   z-index: 1;
-  cursor: none;
+  cursor: default;
 }
 
 .timer p {

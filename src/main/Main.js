@@ -16,22 +16,25 @@ const Main = () => {
     setOpen(true);
     setIsInputClicked(true);
   };
- 
   const handleInputChange = (e) => {
     const value = e.target.value;
     if (value === "") {
-      setCurrentDate("");
+      setCurrentDate(new Date());
       setTime("");
       setInputValue("");
+    } else if (value.length < 18) {
+      setInputValue(value);
     } else {
       const dateTime = new Date(Date.parse(value));
       if (!isNaN(dateTime)) {
         setCurrentDate(dateTime);
-        const formattedTime = dateTime.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric"
-        });
+        const formattedTime = new Intl.DateTimeFormat("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          // hour12: true,
+        }).format(dateTime);
         setTime(formattedTime);
+        setSelectedDate(dateTime);
         setInputValue(
           `${dateTime.toLocaleDateString("en-US", {
             day: "numeric",
@@ -39,6 +42,9 @@ const Main = () => {
             year: "numeric"
           })} ${formattedTime}`
         );
+      } else {
+        console.log(value)
+        setInputValue(value);
       }
     }
   };
@@ -52,18 +58,17 @@ const Main = () => {
 
   // console.log(currentDate)
   const inputDisplayValue = isInputClicked ? inputValue : "";
-  
+
   return (
     <div className="main">
       {/* <div className="input-field"> */}
-        <input
-          onClick={handleOpen}
-          readOnly
-          placeholder="Select a date and time"
-          value={inputDisplayValue}
-          onChange={handleInputChange}
-          className="input"
-        />
+      <input
+        onClick={handleOpen}
+        placeholder="Select a date and time"
+        value={inputDisplayValue}
+        onChange={handleInputChange}
+        className="input"
+      />
       {/* </div> */}
       {open && (
         <DisplayArea
