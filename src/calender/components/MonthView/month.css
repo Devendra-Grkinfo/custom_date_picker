@@ -7,6 +7,7 @@
     column-gap: normal;
     margin-top: 5%;
     align-items: center;
+    height: 90%;
   }
   .selectedMonth {
     background-color:rgb(34, 140, 34);

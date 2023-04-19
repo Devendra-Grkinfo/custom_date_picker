@@ -28,6 +28,7 @@
   justify-content: space-evenly;
   cursor: pointer;
   gap: 5px;
+  height: 90%;
 }
 .button {
   background-color: rgb(255, 255, 255);
@@ -118,6 +119,7 @@
 
 .yearGrid {
   display: grid;
+  height: 90%;
   gap: 40px;
   grid-template-columns: auto auto auto;
   padding: 10px;
@@ -140,11 +142,11 @@
 .disabledYear:hover{
   background-color: rgb(171, 245, 171);
 }
-.rangeGrid{
+/* .rangeGrid{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
-}
+} */
