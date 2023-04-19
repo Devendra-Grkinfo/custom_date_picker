@@ -46,7 +46,7 @@ const Cells = (props) => {
                 ? "selected"
                 : isSameDay(day, activeDay)
                 ? "active"
-                : ""
+                : "notActive"
             }`}
           key={day}
           onClick={() => onDateClick(cloneDay)}
