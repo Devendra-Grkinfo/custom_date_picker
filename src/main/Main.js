@@ -16,17 +16,12 @@ const Main = () => {
     setOpen(true);
     setIsInputClicked(true);
   };
-
   const handleInputChange = (e) => {
     const value = e.target.value;
     if (value === "") {
       setCurrentDate(new Date());
       setTime("");
       setInputValue("");
-    } else if (value.length < inputValue.length) {
-      setInputValue(value);
-      setCurrentDate(new Date());
-      setTime("");
     } else if (value.length < 18) {
       setInputValue(value);
     } else {
@@ -35,7 +30,8 @@ const Main = () => {
         setCurrentDate(dateTime);
         const formattedTime = new Intl.DateTimeFormat("en-US", {
           hour: "2-digit",
-          minute: "2-digit"
+          minute: "2-digit",
+          // hour12: true,
         }).format(dateTime);
         setTime(formattedTime);
         setSelectedDate(dateTime);
