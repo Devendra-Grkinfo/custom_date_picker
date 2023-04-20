@@ -5,13 +5,13 @@
   font-family: Arial, Helvetica, sans-serif;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 3%;
+  
 }
 .weekdays {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-top: 3vh;
+  margin-top: 3%;
   width: 100%;
 }
 .row {
@@ -27,6 +27,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   cursor: pointer;
+  gap: 5px;
+  height: 90%;
 }
 .button {
   background-color: rgb(255, 255, 255);
@@ -47,15 +49,23 @@
   cursor: pointer;
 }
 .active{
-  border: 2px solid red;
+  border: 2px solid rgb(252, 109, 14);
+  border-radius: 5px;
+  padding: 3px;
+}
+.notActive:hover{
+  background-color: rgb(222, 218, 218);
   border-radius: 5px;
 }
 
 .calendar {
   box-sizing: border-box;
-  width: 27.5vw;
+  width: 410px;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10px;
+  position: relative;
 }
 
 .selected {
@@ -109,6 +119,7 @@
 
 .yearGrid {
   display: grid;
+  height: 90%;
   gap: 40px;
   grid-template-columns: auto auto auto;
   padding: 10px;
@@ -120,21 +131,22 @@
   justify-content: center;
   background-color: rgb(34, 140, 34);
   color: white;
+  border-radius: 5px;
 }
 .disabledYear{
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px;
 }
 .disabledYear:hover{
   background-color: rgb(171, 245, 171);
 }
-.rangeGrid{
+/* .rangeGrid{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 2vw;
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
-}
+} */
