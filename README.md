@@ -1,5 +1,5 @@
 # Custom_Date_Picker
-## Props (API)
+## Props
 | Name | Type | Default | Description |
 | --- | --- | ---| --- |
 | Placeholder | string | "select a date and time" | DateTime input's placeholder.|
