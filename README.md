@@ -1,4 +1,4 @@
-# Custom_Date_Picker
+# Custom_DateTime_Picker
 ## Props
 | Name | Type | Default | Description |
 | --- | --- | ---| --- |
