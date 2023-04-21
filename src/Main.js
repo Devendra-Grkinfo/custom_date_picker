@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import Calender from "./Calender";
-import DisplayArea from "./DisplayArea";
+import DisplayArea from "./main/DisplayArea";
 
 const Main = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +18,7 @@ const Main = () => {
           placeholder="When does the filiming starts ?"
         />
       </div>
-      {open ? <DisplayArea /> : <></>}
+      {open ? <DisplayArea/> : <></>}
     </div>
   );
 };

@@ -1,0 +1,152 @@
+.header {
+  display: flex;
+  width:100%;
+  flex-direction: row;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: space-evenly;
+  align-items: center;
+  
+}
+.weekdays {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 3%;
+  width: 100%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 2%;
+  width: 100%;
+  cursor: pointer;
+}
+.cell-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+  gap: 5px;
+  height: 90%;
+}
+.button {
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-name{
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+.active{
+  border: 2px solid rgb(252, 109, 14);
+  border-radius: 5px;
+  padding: 3px;
+}
+.notActive:hover{
+  background-color: rgb(222, 218, 218);
+  border-radius: 5px;
+}
+
+.calendar {
+  box-sizing: border-box;
+  width: 410px;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.selected {
+  background-color: rgb(34, 140, 34);
+  color: white;
+  padding: 3px;
+  font-size:medium;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.activeYear{
+  border: 2px solid red;
+  border-radius: 5px;
+}
+/* :hover{
+  background-color: rgb(171, 245, 171);
+  cursor: pointer;
+} */
+.disabled {
+  color: rgb(122, 121, 121);
+  /* padding: 3px; */
+  font-size:medium;
+  border-radius: 10px;
+}
+/* .disabled:hover{
+  background-color: rgb(171, 245, 171);
+  
+} */
+.notSelected{
+  color: rgb(30, 30, 30);
+  padding: 3px;
+  /* border: 2px solid red; */
+  font-size:medium;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.header-icon {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 10px;
+}
+.header-name{
+  font-size: 1rem;
+}
+.header-icon:hover{
+  border-radius: 30%;
+  background-color: rgb(179, 175, 175);
+}
+
+.yearGrid {
+  display: grid;
+  height: 90%;
+  gap: 40px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+ align-content: center;
+}
+.selectedYear{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(34, 140, 34);
+  color: white;
+  border-radius: 5px;
+}
+.disabledYear{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.disabledYear:hover{
+  background-color: rgb(171, 245, 171);
+}
+/* .rangeGrid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+} */
