@@ -2,7 +2,7 @@
   margin: 0 auto;
   width: 50%;
   text-align: center;
-   /* position: relative; */
+  /* position: relative; */
 }
 
 .input {
@@ -19,7 +19,7 @@
 .display {
   display: flex;
   flex-wrap: wrap;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   padding: 10px;
   /* transform: translate(0%,0%); */
@@ -32,17 +32,19 @@
   margin-top: 10px;
   /* left: 120px; */
 }
-.display > * {
+
+.display>* {
   flex: 1;
 }
 
-.display > :first-child {
+.display> :first-child {
   flex: 7;
 }
 
-.display > :last-child {
+.display> :last-child {
   flex: 3;
 }
+
 .calender {
   display: flex;
   flex-wrap: wrap;
@@ -58,4 +60,42 @@
   display: flex;
   justify-content: center;
 
+}
+
+.error-tooltip {
+  position: relative;
+  visibility: visible;
+  top: 50%;
+  left: 0%;
+  /* top: -35px;
+  left: 105%; */
+  padding: 3px;
+  background-color: #df1005;
+  color: #fff;
+  width: 150px;
+  margin-top: 4px;
+  font-size: 14px;
+  border-radius: 5px;
+
+}
+
+/* .error-tooltip::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; 
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #df1005 transparent transparent;
+} */
+.error-tooltip::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #df1005;
 }
