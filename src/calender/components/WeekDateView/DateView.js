@@ -4,7 +4,7 @@ import Cells from "./Cells";
 const DateView = (props) => {
   const { currentDate, setCurrentDate, setSelectedDate, selectedDate } = props;
 
-  const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const day = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
     <div className="dateview">

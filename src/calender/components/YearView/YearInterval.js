@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 
 const YearInterval = (props) => {
-  const {
-    currentDate,
-    setCurrentDate,
-    decadeStart,
-    month,
-    year,
-    setYear,
-    selectedDate,
-  } = props;
- const[activeYear,setActiveYear]=useState(new Date().getFullYear())
+  const { currentDate, setCurrentDate, decadeStart, month, year, setYear, selectedDate } = props;
+
+  const [activeYear, setActiveYear] = useState(new Date().getFullYear())
   const endYear = decadeStart + 9;
 
   const decadeYears = [];
@@ -29,8 +22,7 @@ const YearInterval = (props) => {
       {decadeYears.map((years) => (
         <div
           key={years}
-          className={`${
-              years === year ? "selectedYear" : years === activeYear ? "activeYear" :"disabledYear"
+          className={`${years === currentDate.getFullYear() ? "selectedYear" : years === activeYear ? "activeYear" : "disabledYear"
             }`}
           // className={` ${
           //   years === year ? "selectedYear" : "disabledYear"

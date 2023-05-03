@@ -29,39 +29,41 @@ const Calender = (props) => {
         setSelectedDate={setSelectedDate}
       />
       {render === 1 && (
-        <>
-          <DateView
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-          />
-        </>
+        <DateView
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
       )}
       {render === 2 && (
-        <>
-          <MonthView
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
-            month={month}
-            setMonth={setMonth}
-            year={year}
-            selectedDate={selectedDate}
-          />
-        </>
+        <MonthView
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+          month={month}
+          setMonth={setMonth}
+          year={year}
+          selectedDate={selectedDate}
+        />
       )}
       {render === 3 && (
-        <>
-          <YearInterval
-            currentDate={currentDate}
-            month={month}
-            decadeStart={decadeStart}
-            year={year}
-            setYear={setYear}
-            selectedDate={selectedDate}
-            setCurrentDate={setCurrentDate}
-          />
-        </>
+        <YearInterval
+          currentDate={currentDate}
+          month={month}
+          decadeStart={decadeStart}
+          year={year}
+          setYear={setYear}
+          selectedDate={selectedDate}
+          setCurrentDate={setCurrentDate}
+        />
+      )}
+      {render === 4 && (
+        <DateView
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
       )}
     </div>
   );

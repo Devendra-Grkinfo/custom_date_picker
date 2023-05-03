@@ -1,24 +1,9 @@
-import React,{useState} from "react";
-import {
-  format,
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-  isSameDay,
-  isSameMonth,
-  addDays,
-} from "date-fns";
+import React, { useState } from "react";
+import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameDay, isSameMonth, addDays } from "date-fns";
 
 const Cells = (props) => {
-  const {
-    currentDate,
-    setCurrentDate,
-    selectedDate,
-    setSelectedDate,
-    year,
-    month,
-  } = props;
+  const { currentDate, setCurrentDate, selectedDate, setSelectedDate, year, month } = props;
+
   const [activeDay, setActiveDay] = useState(new Date());
   const onDateClick = (day) => {
     setSelectedDate(day);
@@ -39,20 +24,24 @@ const Cells = (props) => {
       const cloneDay = day;
       days.push(
         <div
-                    className={`${
-              !isSameMonth(day, monthStart)
-                ? "disabled"
-                : isSameDay(day, selectedDate)
+          className={`${!isSameMonth(day, monthStart)
+            ? "disabled"
+            : isSameDay(day, selectedDate) && isSameDay(day, activeDay)
+              ? "active selected"
+              : isSameDay(day, selectedDate)
                 ? "selected"
                 : isSameDay(day, activeDay)
-                ? "active"
-                : "notActive"
+                  ? "active"
+                  : isSameDay(day, currentDate)
+                    ? "selected"
+                    : "notActive"
             }`}
           key={day}
           onClick={() => onDateClick(cloneDay)}
         >
-          <span className="number">{formattedDate}</span>
-          {/* <span className="bg">{formattedDate}</span> */}
+          <div className="number">
+            {formattedDate}
+          </div>
         </div>
       );
       day = addDays(day, 1);
