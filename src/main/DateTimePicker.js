@@ -5,15 +5,15 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
 
   const [open, setOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  // const [year,setYear]=useState(new Date().getFullYear())
-  // const [month,setMonth]=useState(new Date().getMonth())
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [time, setTime] = useState("12:00 AM");
   const [inputValue, setInputValue] = useState("");
   const [isInputClicked, setIsInputClicked] = useState(false);
   const [isValidDateTime, setIsValidDateTime] = useState(true);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState("bottom")
   const tooltipRef = useRef(null);
+  const inputRef = useRef(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,7 +49,7 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
           minute: "2-digit"
         }).format(dateTime);
         setTime(formattedTime);
-        setSelectedDate(dateTime);
+        // setSelectedDate(dateTime);
         setInputValue(
           `${dateTime.toLocaleDateString("en-US", {
             day: "numeric",
@@ -65,7 +65,6 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
       }
     }
   };
-
   useEffect(() => {
     if (currentDate && time) {
       let formattedValue = `${currentDate.toDateString()} ${time}`;
@@ -84,13 +83,38 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
     window.addEventListener('keydown', handleKeyDown);
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("click", (event) => {
-      if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
-        setShowTooltip(false);
-      }
-    })
-  }, [tooltipRef]);
+  const handleInputFocus = () => {
+    setShowTooltip(false);
+  };
+
+  // useEffect(() => {
+  //   if (tooltipRef.current) {
+  //     const inputRect = tooltipRef.current.getBoundingClientRect();
+  //     const spaceAbove = inputRect.top;
+  //     const spaceBelow = window.innerHeight - inputRect.bottom;
+  //     const spaceLeft = inputRect.left;
+  //     const spaceRight = window.innerWidth - inputRect.right;
+  //     const tooltipHeight = tooltipRef.current.offsetHeight;
+  //     const tooltipWidth = tooltipRef.current.offsetWidth;
+  //     let position = "bottom";
+  //     if (spaceAbove < tooltipHeight && spaceBelow > tooltipHeight) {
+  //       position = "top";
+  //     } else if (spaceLeft < tooltipWidth && spaceRight > tooltipWidth) {
+  //       position = "right";
+  //     } else if (spaceRight < tooltipWidth && spaceLeft > tooltipWidth) {
+  //       position = "left";
+  //     }
+  //     setTooltipPosition(position);
+  //   }
+  // }, [tooltipRef.current]);
+
+  // useEffect(() => {
+  //   window.addEventListener("click", (event) => {
+  //     if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+  //       setShowTooltip(false);
+  //     }
+  //   })
+  // }, [tooltipRef]);
 
   const handleSelectOutside = () => {
     if (inputValue.trim() !== "") {
@@ -104,6 +128,7 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
   return (
     <div className="main">
       <input
+        ref={inputRef}
         onClick={handleOpen}
         placeholder={placeholder}
         value={inputDisplayValue}
@@ -111,12 +136,13 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
         onKeyUp={handleInputKeyPress}
         onKeyDown={handleKeyDown}
         onBlur={handleSelectOutside}
+        onFocus={handleInputFocus}
         className="input "
-      // title={isValidDateTime ? "" : "Invalid date time value"}
+        title={isValidDateTime ? "" : "Invalid date time value"}
 
       />
       {!isValidDateTime && showTooltip && (
-        <div ref={tooltipRef} className="error-tooltip">
+        <div ref={tooltipRef} className={`error-tooltip ${tooltipPosition}`}>
           Invalid date time value
         </div>
       )}
