@@ -1,33 +1,45 @@
 import React, { useEffect, useState, useRef } from "react";
 import DisplayArea from "./DisplayArea";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateState } from "../Store/dateTimePickerSlice";
+import { setIsInputClicked, setInputValue, setIsValidDateTime, setShowTooltip, setOpen } from '../Store/dateTimePickerSlice';
 
 const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval, placeholder }) => {
+  const dispatch = useDispatch();
 
-  const [open, setOpen] = useState(false);
+  const { isInputClicked, inputValue, isValidDateTime, showTooltip, open, time } = useSelector((state) => state.dateTimePicker);
+
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [time, setTime] = useState("12:00 AM");
-  const [inputValue, setInputValue] = useState("");
-  const [isInputClicked, setIsInputClicked] = useState(false);
-  const [isValidDateTime, setIsValidDateTime] = useState(true);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState("bottom")
+  // const [time, setTime] = useState("12:00 AM");
+  // const [open, setOpen] = useState(false);
+  // const [inputValue, setInputValue] = useState("");
+  // const [isInputClicked, setIsInputClicked] = useState(false);
+  // const [isValidDateTime, setIsValidDateTime] = useState(true);
+  // const [showTooltip, setShowTooltip] = useState(false);
+  // const [tooltipPosition, setTooltipPosition] = useState("bottom")
+
   const tooltipRef = useRef(null);
   const inputRef = useRef(null);
 
   const handleOpen = () => {
-    setOpen(true);
-    setIsInputClicked(true);
+    // dispatch(setOpen(true));
+    // dispatch(setIsInputClicked(true));
+    dispatch(updateState({ open: true }));
+    dispatch(updateState({ isInputClicked: true }));
   };
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     if (value === "") {
       setCurrentDate(new Date());
-      setTime("");
-      setInputValue("");
+      // setTime("");
+      // dispatch(setInputValue(""));
+      dispatch(updateState({ time: "" }))
+      dispatch(updateState({ inputValue: "" }));
     } else {
-      setInputValue(value);
+      // dispatch(setInputValue(value));
+      dispatch(updateState({ inputValue: value }));
     }
   };
 
@@ -48,28 +60,33 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
           hour: "2-digit",
           minute: "2-digit"
         }).format(dateTime);
-        setTime(formattedTime);
+        // setTime(formattedTime);
         // setSelectedDate(dateTime);
-        setInputValue(
-          `${dateTime.toLocaleDateString("en-US", {
-            day: "numeric",
-            month: "numeric",
-            year: "numeric"
-          })} ${formattedTime}`
-        );
-        setIsValidDateTime(true);
-        setShowTooltip(false);
+        // setInputValue(
+        //   `${dateTime.toLocaleDateString("en-US", {
+        //     day: "numeric",
+        //     month: "numeric",
+        //     year: "numeric"
+        //   })} ${formattedTime}`
+        // );
+        dispatch(updateState({ time: formattedTime }))
+        dispatch(updateState({ isValidDateTime: true }));
+        dispatch(updateState({ showTooltip: false }));
       } else {
-        setIsValidDateTime(false);
-        setShowTooltip(true);
+        // dispatch(setIsValidDateTime(false));
+        // dispatch(setShowTooltip(true));
+        dispatch(updateState({ isValidDateTime: false }));
+        dispatch(updateState({ showTooltip: true }));
       }
     }
   };
   useEffect(() => {
     if (currentDate && time) {
       let formattedValue = `${currentDate.toDateString()} ${time}`;
-      setInputValue(formattedValue);
-      setIsValidDateTime(true);
+      // dispatch(setInputValue(formattedValue));
+      // dispatch(setIsValidDateTime(true));
+      dispatch(updateState({ inputValue: formattedValue }));
+      dispatch(updateState({ isValidDateTime: true }));
     }
   }, [currentDate, time]);
 
@@ -84,7 +101,8 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
   }, []);
 
   const handleInputFocus = () => {
-    setShowTooltip(false);
+    // dispatch(setShowTooltip(false));
+    dispatch(updateState({ showTooltip: false }));
   };
 
   // useEffect(() => {
@@ -142,7 +160,7 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
 
       />
       {!isValidDateTime && showTooltip && (
-        <div ref={tooltipRef} className={`error-tooltip ${tooltipPosition}`}>
+        <div ref={tooltipRef} className="error-tooltip" >
           Invalid date time value
         </div>
       )}
@@ -151,13 +169,13 @@ const DateTimePicker = ({ showTimer, selectedColor, listIntervals, timeInterval,
         <DisplayArea
           autoFocus
           open={open}
-          setOpen={setOpen}
+          // setOpen={setOpen}
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
           time={time}
-          setTime={setTime}
+          // setTime={setTime}
           showTimer={showTimer}
           listIntervals={listIntervals}
           timeInterval={timeInterval}

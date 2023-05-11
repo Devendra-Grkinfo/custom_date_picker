@@ -2,20 +2,24 @@ import React, { useRef } from "react";
 import Calender from "../calender/Calender";
 import Timer from "../timer/Timer";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateState } from "../Store/dateTimePickerSlice";
 
 const DisplayArea = (props) => {
-
-  const { currentDate, setCurrentDate, selectedDate, setSelectedDate, time, setTime, showTimer, selectedColor,listIntervals, setOpen, open, timeInterval } = props;
+  const dispatch = useDispatch();
+  const { currentDate, setCurrentDate, selectedDate, setSelectedDate, setTime, showTimer, selectedColor, listIntervals, setOpen, timeInterval } = props;
+  const { open, time } = useSelector((state) => state.dateTimePicker);
 
   let displayRef = useRef()
   useEffect(() => {
     document.addEventListener('mousedown', (event) => {
       if (displayRef.current && !displayRef.current.contains(event.target)) {
-        setOpen(!open)
+        // dispatch(setOpen(!open))
+        dispatch(updateState({ open: false }));
       }
     })
-  },[])
-  
+  }, [])
+
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += timeInterval) {
@@ -28,8 +32,8 @@ const DisplayArea = (props) => {
 
   return (
     <div className="display" ref={displayRef}>
-        <Calender currentDate={currentDate} setCurrentDate={setCurrentDate} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-        {showTimer ? <Timer time={times} selectedTime={time} setTime={setTime} listIntervals={listIntervals} selectedColor={selectedColor} /> : null}
+      <Calender currentDate={currentDate} setCurrentDate={setCurrentDate} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      {showTimer ? <Timer times={times} selectedTime={time} setTime={setTime} listIntervals={listIntervals} selectedColor={selectedColor} /> : null}
     </div>
   );
 };
